@@ -62,13 +62,11 @@ func (cue *Cue) decodeBytes(bites []byte) bool {
 // DscptrLoop loops over any splice descriptors
 func (cue *Cue) dscptrLoop(dll uint16, bd *bitDecoder) {
 	var i uint16
-	fmt.Println("DLL: ", dll)
 	i = 0
 	l := dll
 	for i < l {
 
 		tag := bd.uInt8(8)
-		fmt.Println("TAG is now: ", tag)
 		i++
 		length := bd.uInt16(8)
 		i++
