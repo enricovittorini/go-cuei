@@ -1,4 +1,4 @@
-module github.com/enricovittorini/go-cuei-test
+module github.com/enricovittorini/go-cuei
 
 go 1.21.0
 
