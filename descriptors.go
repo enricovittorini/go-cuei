@@ -153,7 +153,7 @@ func (dscptr *Descriptor) timeDescriptor(bd *bitDecoder, tag uint8, length uint8
 func (dscptr *Descriptor) segmentationDescriptor(bd *bitDecoder, tag uint8, length uint8) {
 	dscptr.Tag = tag
 	dscptr.Length = length
-	fmt.Println("Desfriptor Length: ", dscptr.Length)
+	fmt.Println("Desfriptor Length: ", length)
 	dscptr.Identifier = bd.asAscii(32)
 	if dscptr.Identifier != "CUEI" {
 		log.Fatal("Segmentation Descriptor Identifies is not 0x43554549 but is ", dscptr.Identifier)
@@ -216,10 +216,10 @@ func (dscptr *Descriptor) decodeSegmentation(bd *bitDecoder) {
 	dscptr.SegmentsExpected = bd.uInt8(8)
 	subSegIDs := []uint16{0x34, 0x36, 0x38, 0x3a}
 	if isIn(subSegIDs, uint16(dscptr.SegmentationTypeID)) {
-		//dscptr.SubSegmentNum = bd.uInt8(8)
-		//dscptr.SubSegmentsExpected = bd.uInt8(8)
-		dscptr.SubSegmentNum = 0
-		dscptr.SubSegmentsExpected = 0
+		dscptr.SubSegmentNum = bd.uInt8(8)
+		dscptr.SubSegmentsExpected = bd.uInt8(8)
+		//dscptr.SubSegmentNum = 0
+		//dscptr.SubSegmentsExpected = 0
 	}
 }
 

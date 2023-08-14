@@ -6,7 +6,6 @@ import (
 )
 
 /*
-
 Cue is a SCTE35 cue.
 
 A Cue contains:
@@ -63,10 +62,13 @@ func (cue *Cue) decodeBytes(bites []byte) bool {
 // DscptrLoop loops over any splice descriptors
 func (cue *Cue) dscptrLoop(dll uint16, bd *bitDecoder) {
 	var i uint16
+	fmt.Println("DLL: ", dll)
 	i = 0
 	l := dll
 	for i < l {
+
 		tag := bd.uInt8(8)
+		fmt.Println("TAG is now: ", tag)
 		i++
 		length := bd.uInt16(8)
 		i++
@@ -161,8 +163,8 @@ func (cue *Cue) mkSpliceInsert() {
 }
 
 /*
-	Convert  Cue.Command  from a  Time Signal
-	to a Splice Insert and return a base64 string
+Convert  Cue.Command  from a  Time Signal
+to a Splice Insert and return a base64 string
 */
 func (cue *Cue) Six2Five() string {
 	segStarts := []uint16{0x22, 0x30, 0x32, 0x34, 0x36, 0x38, 0x3a, 0x3c, 0x3e, 0x44, 0x46}
